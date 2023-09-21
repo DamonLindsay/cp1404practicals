@@ -5,7 +5,8 @@ MINIMUM_PASSWORD_LENGTH = 5
 
 
 def main():
-    """This program will get a password from the user, and then print a number of *'s equal to the passwords length."""
+    """This program will get a password from the user, and then print a number of *'s equal to the
+    password's length."""
     password = get_password()
 
     print_stars(password)
@@ -13,7 +14,7 @@ def main():
 
 def print_stars(password):
     """Print a number of *'s matching the length of the given argument."""
-    for character in range(len(password)):
+    for character in password:
         print("*", end="")
 
 
