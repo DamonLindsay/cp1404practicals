@@ -30,8 +30,8 @@ def determine_result_message(score):
     if score >= 90:
         return "Excellent"
     if score >= 50:
-        return "Pass."
-    return "Bad."
+        return "Passable"
+    return "Bad"
 
 
 main()
