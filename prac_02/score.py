@@ -17,7 +17,8 @@ def main():
     print(result_message)
 
     random_score = random.randint(1, 100)
-    print(random_score)
+    print(f"Random number generated was: {random_score}")
+
     result_message = determine_result_message(random_score)
     print(result_message)
 
@@ -25,16 +26,12 @@ def main():
 def determine_result_message(score):
     """Determine the appropriate message based on the given score."""
     if score < 0 or score > 100:
-        score_message = "Invalid score."
-        return score_message
+        return "Invalid score"
     if score >= 90:
-        score_message = "Excellent."
-        return score_message
+        return "Excellent"
     if score >= 50:
-        score_message = "Pass."
-        return score_message
-    score_message = "Bad."
-    return score_message
+        return "Pass."
+    return "Bad."
 
 
 main()

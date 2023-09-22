@@ -48,16 +48,12 @@ def get_valid_score():
 def determine_result_message(score):
     """Determine the appropriate message based on the given score."""
     if score < 0 or score > 100:
-        score_message = "Invalid score."
-        return score_message
+        return "Invalid score"
     if score >= 90:
-        score_message = "Excellent."
-        return score_message
+        return "Excellent"
     if score >= 50:
-        score_message = "Pass."
-        return score_message
-    score_message = "Bad."
-    return score_message
+        return "Pass."
+    return "Bad."
 
 
 main()
