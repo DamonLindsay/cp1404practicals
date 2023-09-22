@@ -1,12 +1,17 @@
 """
 More Scores - Practice / Extension
 """
+import random
 
 
 def main():
     """This program will ask the user for a random number of scores, then generate that many random numbers.
     For each of those scores, write the result to a file."""
-    pass
+    number_of_scores = int(input("Enter a number of random scores to generate: "))
+
+    for score in range(number_of_scores):
+        score = random.randint(0, 100)
+        print(f"{score} is {determine_result_message(score)}.")
 
 
 def determine_result_message(score):
@@ -16,8 +21,8 @@ def determine_result_message(score):
     if score >= 90:
         return "Excellent"
     if score >= 50:
-        return "Pass."
-    return "Bad."
+        return "Passable"
+    return "Bad"
 
 
 main()
