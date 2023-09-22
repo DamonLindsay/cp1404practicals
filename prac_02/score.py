@@ -9,8 +9,8 @@ import random
 
 
 def main():
-    """This program gets the score via input, and then calculates the
-    appropriate message for that score."""
+    """This program will get a score via input, and then determine the
+    appropriate message for that score.  It well then repeat with a random number between 1-100."""
     score = float(input("Enter score: "))
 
     result_message = determine_result_message(score)
