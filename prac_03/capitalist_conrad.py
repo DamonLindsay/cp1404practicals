@@ -16,7 +16,7 @@ MAX_PRICE = 100.00
 INITIAL_PRICE = 10.0
 OUTPUT_FILE = "capitalist_conrad_output_file.txt"
 
-out_file = open("OUTPUT_FILE", "w")
+out_file = open(OUTPUT_FILE, "w")
 
 price = INITIAL_PRICE
 print(f"Starting price: ${price:,.2f}", file=out_file)
