@@ -15,10 +15,13 @@ If the denominator = 0, display an error message and then ask the user to enter 
 try:
     numerator = int(input("Enter the numerator: "))
     denominator = int(input("Enter the denominator: "))
+    while denominator == 0:
+        print("Error: Cannot divide by zero.")
+        denominator = int(input("Enter the denominator: "))
+
     fraction = numerator / denominator
     print(fraction)
+
 except ValueError:
     print("Numerator and denominator must be valid numbers!")
-except ZeroDivisionError:
-    print("Cannot divide by zero!")
 print("Finished.")
