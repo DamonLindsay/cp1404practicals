@@ -19,5 +19,15 @@ def question_02():
         print(f"Your name is {name}.")
 
 
+def question_03():
+    """Answer for question 3 for files.py"""
+    with open("numbers.txt", "r") as in_file:
+        first_number = int(in_file.readline().strip())
+        second_number = int(in_file.readline().strip())
+        total = first_number + second_number
+        print(total)
+
+
 # question_01()
-question_02()
+# question_02()
+question_03()
