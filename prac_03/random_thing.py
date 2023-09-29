@@ -15,4 +15,4 @@ def main():
     print(bool(random.getrandbits(1)))
 
 
-main
+main()
