@@ -14,12 +14,26 @@ def main():
     print(f"The largest number is {max(numbers)}")
     print(f"The average of the numbers is {sum(numbers) / len(numbers)}")
 
+    usernames = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye', 'swei45', 'BaseInterpreterInterface',
+                 'BaseStdIn', 'Command', 'ExecState', 'InteractiveConsole', 'InterpreterInterface', 'StartServer',
+                 'bob']
+    username = input("Enter username: ")
+    validate_username(username, usernames)
+
 
 def get_list_of_numbers(numbers):
     """Get a list of numbers."""
     for i in range(NUMBER_OF_NUMBERS):
         number = int(input("Number: "))
         numbers.append(number)
+
+
+def validate_username(username, usernames):
+    """Check if the username is in the list of usernames."""
+    if username in usernames:
+        print("Access granted.")
+    else:
+        print("Access denied.")
 
 
 main()
