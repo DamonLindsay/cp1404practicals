@@ -13,19 +13,21 @@ def main():
         strings.append(user_string)
         user_string = input("Enter a string: ")
 
-    repeated_words = return_repeated_words(strings)
+    repeated_words = find_repeated_items(strings)
 
     print(f"Strings repeated: {repeated_words}")
 
 
-def return_repeated_words(strings):
+def find_repeated_items(items):
     """Find any words repeated more than once in a list and return a new list containing the repeated words."""
-    repeated_words = []
-    for string in strings:
-        if strings.count(string) > 1:
-            repeated_words.append(string)
+    repeated_items = []
+    for item in items:
+        if items.count(item) > 1:
+            repeated_items.append(item)
 
-    return repeated_words
+    return repeated_items
 
 
-main()
+# main()
+
+print(find_repeated_items([1, 2, 3, 3, 1, 5, 1]))
