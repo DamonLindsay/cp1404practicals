@@ -23,9 +23,10 @@ def main():
 
 def get_list_of_numbers(numbers):
     """Get a list of numbers."""
-    for i in range(NUMBER_OF_NUMBERS):
-        number = int(input("Number: "))
+    number = int(input(f"Number {len(numbers) + 1}: "))
+    while number != 0:
         numbers.append(number)
+        number = int(input(f"Number {len(numbers) + 1}: "))
 
 
 def validate_username(username, usernames):
