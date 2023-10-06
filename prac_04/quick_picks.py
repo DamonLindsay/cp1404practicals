@@ -24,6 +24,7 @@ def print_quick_pick(number_of_quick_picks):
     """Print the quick pick."""
     for i in range(number_of_quick_picks):
         quick_picks = generate_quick_pick(NUMBER_OF_NUMBERS_PER_QUICK_PICK, LOWEST_RANDOM_NUMBER, HIGHEST_RANDOM_NUMBER)
+        quick_picks.sort()
         for quick_pick in quick_picks:
             print(f"{quick_pick:2}", end=" ")
         print()
