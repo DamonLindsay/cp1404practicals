@@ -15,19 +15,17 @@ def main():
 
     repeated_words = find_repeated_items(strings)
 
-    print(f"Strings repeated: {repeated_words}")
+    print("Strings repeated:", ", ".join(repeated_words))
 
 
 def find_repeated_items(items):
     """Find any words repeated more than once in a list and return a new list containing the repeated words."""
     repeated_items = []
     for item in items:
-        if items.count(item) > 1:
+        if item not in repeated_items and items.count(item) > 1:
             repeated_items.append(item)
 
     return repeated_items
 
 
-# main()
-
-print(find_repeated_items([1, 2, 3, 3, 1, 5, 1]))
+main()
