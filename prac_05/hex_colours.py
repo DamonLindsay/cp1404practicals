@@ -11,8 +11,16 @@ Entering an invalid colour name should not crash the program.
 Allow the user to enter names until they enter a blank one to stop the loop.
 """
 
-COLOUR_NAME_TO_COLOUR_CODE = {"Absolute Zero": "#0048ba", "Acid Green": "#b0bf1a", "AliceBlue": "#f0f8ff",
+COLOUR_NAME_TO_COLOUR_CODE = {"Absolute Zero": "#0048ba", "Acid Green": "#b0bf1a", "Alice Blue": "#f0f8ff",
                               "Alizarin Crimson": "#e32636", "Amaranth": "#e52b50", "Amber": "#ffbf00",
                               "Amethyst": "#9966cc", "Antique White": "#faebd7", "Apricot": "#fbceb1",
                               "Aqua": "#00ffff"}
 
+
+colour_name = input("Enter a colour name: ").title()
+while colour_name != "":
+    try:
+        print(f"{colour_name} is {COLOUR_NAME_TO_COLOUR_CODE[colour_name]}.")
+    except KeyError:
+        print("Invalid colour name.")
+    colour_name = input("Enter a colour name: ").title()
