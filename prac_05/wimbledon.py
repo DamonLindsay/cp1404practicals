@@ -9,7 +9,6 @@ FILENAME = "wimbledon.csv"
 def main():
     """This program will read a file, process the data and display the processed information."""
 
-
     wimbledon_data = read_wimbledon_data(FILENAME)
     champion_counts = countries = process_wimbledon_data(wimbledon_data)
 
@@ -43,8 +42,8 @@ def process_wimbledon_data(data):
         countries_that_won_wimbledon.add(country_of_champion)
 
         champion = row[2]
-        wimbledon_champion_to_win_count[champion] = wimbledon_champion_to_win_count.get(champion, 0) + 1\
+        wimbledon_champion_to_win_count[champion] = wimbledon_champion_to_win_count.get(champion, 0) + 1
+        return wimbledon_champion_to_win_count, countries_that_won_wimbledon
 
-    return wimbledon_champion_to_win_count, countries_that_won_wimbledon
 
 main()
