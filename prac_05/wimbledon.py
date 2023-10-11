@@ -10,8 +10,8 @@ def main():
     """This program will read a file, process the data and display the processed information."""
 
     wimbledon_data = read_wimbledon_data(FILENAME)
-    champion_counts, countries = process_wimbledon_data(wimbledon_data)
-    display_wimbledon_results(champion_counts, countries)
+    wimbledon_champion_to_win_count, countries_that_won_wimbledon = process_wimbledon_data(wimbledon_data)
+    display_wimbledon_results(wimbledon_champion_to_win_count, countries_that_won_wimbledon)
 
 
 def read_wimbledon_data(filename):
