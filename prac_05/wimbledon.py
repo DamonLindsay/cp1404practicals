@@ -1,7 +1,7 @@
 """
 Wimbledon - Prac 05
 Estimated: 40 minutes
-Actual: x Minutes
+Actual: 60+ Minutes
 """
 FILENAME = "wimbledon.csv"
 
