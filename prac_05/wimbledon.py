@@ -8,29 +8,17 @@ FILENAME = "wimbledon.csv"
 
 def main():
     """This program will read a file, process the data and display the processed information."""
-    wimbledon_champion_to_win_count = {}
-    countries_that_won_wimbledon = set()
+
 
     wimbledon_data = read_wimbledon_data(FILENAME)
+    champion_counts = countries = process_wimbledon_data(wimbledon_data)
 
-    with open(FILENAME, "r", encoding="utf-8-sig") as in_file:
-        next(in_file)
-        for row in in_file:
-            row = row.split(",")
-            country_of_champion = row[1]
-            countries_that_won_wimbledon.add(country_of_champion)
-            champion = row[2]
-            try:
-                wimbledon_champion_to_win_count[champion] += 1
-            except KeyError:
-                wimbledon_champion_to_win_count[champion] = 1
-
-    print("Wimbledon Champions:")
-    for wimbledon_champion, win_count in wimbledon_champion_to_win_count.items():
-        print(f"{wimbledon_champion} {win_count}")
-    print()
-    print(f"These {len(countries_that_won_wimbledon)} countries have won Wimbledon: ")
-    print(", ".join(list(sorted(countries_that_won_wimbledon))))
+    # print("Wimbledon Champions:")
+    # for wimbledon_champion, win_count in wimbledon_champion_to_win_count.items():
+    #     print(f"{wimbledon_champion} {win_count}")
+    # print()
+    # print(f"These {len(countries_that_won_wimbledon)} countries have won Wimbledon: ")
+    # print(", ".join(list(sorted(countries_that_won_wimbledon))))
 
 
 def read_wimbledon_data(filename):
@@ -44,5 +32,19 @@ def read_wimbledon_data(filename):
             wimbledon_data.append(row)
     return wimbledon_data
 
+
+def process_wimbledon_data(data):
+    """Process the Wimbledon data to calculate the champion win counts and list of countries."""
+    wimbledon_champion_to_win_count = {}
+    countries_that_won_wimbledon = set()
+
+    for row in data:
+        country_of_champion = row[1]
+        countries_that_won_wimbledon.add(country_of_champion)
+
+        champion = row[2]
+        wimbledon_champion_to_win_count[champion] = wimbledon_champion_to_win_count.get(champion, 0) + 1\
+
+    return wimbledon_champion_to_win_count, countries_that_won_wimbledon
 
 main()
