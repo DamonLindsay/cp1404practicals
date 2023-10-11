@@ -10,14 +10,8 @@ def main():
     """This program will read a file, process the data and display the processed information."""
 
     wimbledon_data = read_wimbledon_data(FILENAME)
-    champion_counts = countries = process_wimbledon_data(wimbledon_data)
-
-    # print("Wimbledon Champions:")
-    # for wimbledon_champion, win_count in wimbledon_champion_to_win_count.items():
-    #     print(f"{wimbledon_champion} {win_count}")
-    # print()
-    # print(f"These {len(countries_that_won_wimbledon)} countries have won Wimbledon: ")
-    # print(", ".join(list(sorted(countries_that_won_wimbledon))))
+    champion_counts, countries = process_wimbledon_data(wimbledon_data)
+    display_wimbledon_results(champion_counts, countries)
 
 
 def read_wimbledon_data(filename):
@@ -43,7 +37,17 @@ def process_wimbledon_data(data):
 
         champion = row[2]
         wimbledon_champion_to_win_count[champion] = wimbledon_champion_to_win_count.get(champion, 0) + 1
-        return wimbledon_champion_to_win_count, countries_that_won_wimbledon
+    return wimbledon_champion_to_win_count, countries_that_won_wimbledon
+
+
+def display_wimbledon_results(champion_counts, countries):
+    """Display the Wimbledon champion win counts and the list of countries that won."""
+    print(f"Wimbledon Champions:")
+    for wimbledon_champion, win_count in champion_counts.items():
+        print(f"{wimbledon_champion} {win_count}")
+    print()
+    print(f"These {len(countries)} countries have won Wimbledon: ")
+    print(", ".join(sorted(countries)))
 
 
 main()
