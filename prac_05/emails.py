@@ -17,7 +17,7 @@ def main():
         cleaned_name = clean_name(name)
         response = input(f"Is your name {cleaned_name}? (Y/n) ")
 
-        if response.lower() in ("y", "yes", ""):
+        if response.lower() not in ("n", "no"):
             email_to_name[email] = cleaned_name
         else:
             custom_name = input("Name: ")
