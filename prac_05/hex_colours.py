@@ -16,11 +16,12 @@ COLOUR_NAME_TO_COLOUR_CODE = {"Absolute Zero": "#0048ba", "Acid Green": "#b0bf1a
                               "Amethyst": "#9966cc", "AntiqueWhite": "#faebd7", "Apricot": "#fbceb1",
                               "Aqua": "#00ffff"}
 
-colour_name = input("Enter a colour name: ")
+colour_name = input("Enter a colour name: ").lower()
 while colour_name != "":
     try:
-        print(f"{colour_name} is {COLOUR_NAME_TO_COLOUR_CODE[colour_name]}.")
+        for key in COLOUR_NAME_TO_COLOUR_CODE.keys():
+            if key.lower() == colour_name:
+                print(f"{key} is {COLOUR_NAME_TO_COLOUR_CODE[key]}.")
     except KeyError:
         print("Invalid colour name.")
-    colour_name = input("Enter a colour name: ")
-
+    colour_name = input("Enter a colour name: ").lower()
