@@ -1,8 +1,5 @@
 """
 Guitar class module
-
-Expected Finish Time: 30 minutes (4:47pm start)
-Actual Finish Time:
 """
 CURRENT_YEAR = 2023
 
@@ -18,7 +15,7 @@ class Guitar:
 
     def __str__(self):
         """Return the string version of the Guitar object."""
-        return f"{self.name} ({self.year}) : {self.cost:.2f}"
+        return f"{self.name} ({self.year}) : ${self.cost:.2f}"
 
     def get_age(self):
         """Return how old the guitar is in years."""
