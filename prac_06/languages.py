@@ -1,6 +1,6 @@
 """
-Expected Time: 30 mins (4:27pm start)
-Actual Time:
+Expected Time: 30 minutes (4:27pm start)
+Actual Time: 16 minutes (4:43pm finish)
 """
 
 from prac_06.programming_language import ProgrammingLanguage
