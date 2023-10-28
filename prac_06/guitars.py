@@ -1,6 +1,6 @@
 """
 Expected Finish Time: 30 minutes (4:47pm start)
-Actual Finish Time:
+Actual Finish Time: 44 minutes (5:31pm finish)
 """
 
 from prac_06.guitar import Guitar
