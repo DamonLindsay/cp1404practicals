@@ -59,9 +59,24 @@ def read_project_from_file(projects, filename):
 
 def display_projects(projects):
     """Display all projects in the current list."""
+    display_incomplete_projects(projects)
+    display_completed_projects(projects)
+
+
+def display_incomplete_projects(projects):
+    """Display incomplete projects."""
     print("Incomplete projects:")
     for project in projects:
-        print(f"  {project}")
+        if project.completion_percentage < 100:
+            print(f"  {project}")
+
+
+def display_completed_projects(projects):
+    """Display completed projects."""
+    print("Completed projects:")
+    for project in projects:
+        if project.completion_percentage == 100:
+            print(f"  {project}")
 
 
 main()
