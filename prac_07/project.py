@@ -23,3 +23,15 @@ class Project:
         """Return the string representation of the Project object."""  # TODO BETTER DOCSTRING?
         return (f"Name: {self.name}, Start Date: {self.start_date}, Priority: {self.priority}, "
                 f"Cost Estimate: {self.cost_estimate}, Completion Percentage: {self.completion_percentage}")
+
+    def __lt__(self, other):
+        """Determine which project is less important based on its priority."""
+        return self.priority < other.priority
+
+    def __eq__(self, other):
+        """Determine which project is equally import based on its priority."""
+        return self.priority == other.priority
+
+    def __gt__(self, other):
+        """Determine which project is more important based on its priority."""
+        return self.priority > other.priority
