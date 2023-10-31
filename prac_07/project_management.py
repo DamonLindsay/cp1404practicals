@@ -27,7 +27,8 @@ def main():
             filename = input("Enter Filename: ")
             read_project_from_file(projects, filename)
         elif choice == "S":
-            print("Save projects")
+            filename = input("Filename: ")
+            save_projects_to_file(projects, filename)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -55,6 +56,14 @@ def read_project_from_file(projects, filename):
             percentage_completion = int(parts[4])
             project = Project(name, start_date, priority, cost, percentage_completion)
             projects.append(project)
+
+
+def save_projects_to_file(projects, filename):
+    """Save the projects to a specified file."""
+    with open(filename, "w", encoding="utf-8") as output_file:
+        for project in projects:
+            print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
+                  f"{project.completion_percentage}", file=output_file)
 
 
 def display_projects(projects):
