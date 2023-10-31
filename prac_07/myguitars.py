@@ -1,7 +1,7 @@
 """
 My Guitars
-Expected Time: 60 mins (3:33pm start)
-Actual Time:
+Expected Time: 60 minutes (3:33pm start)
+Actual Time: 31 minutes (4:04pm finish)
 """
 
 from guitar import Guitar
