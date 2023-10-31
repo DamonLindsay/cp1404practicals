@@ -29,7 +29,7 @@ def main():
         elif choice == "S":
             print("Save projects")
         elif choice == "D":
-            print("Display projects")
+            display_projects(projects)
         elif choice == "F":
             print("Filter projects by date")
         elif choice == "A":
@@ -55,6 +55,13 @@ def read_project_from_file(projects, filename):
             percentage_completion = int(parts[4])
             project = Project(name, start_date, priority, cost, percentage_completion)
             projects.append(project)
+
+
+def display_projects(projects):
+    """Display all projects in the current list."""
+    print("Incomplete projects:")
+    for project in projects:
+        print(f"  {project}")
 
 
 main()
