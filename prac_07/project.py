@@ -16,8 +16,8 @@ class Project:
 
     def __str__(self):
         """Return the string representation of the Project object."""
-        return (f"Name: {self.name}, Start Date: {self.start_date}, Priority: {self.priority}, "
-                f"Cost Estimate: {self.cost_estimate}, Completion Percentage: {self.completion_percentage}")
+        return (f"{self.name}, start: {self.start_date}, priority {self.priority}, "
+                f"Cost estimate: ${self.cost_estimate:.2f}, completion: {self.completion_percentage}%")
 
     def __repr__(self):
         """Return the string representation of the Project object."""  # TODO BETTER DOCSTRING?
