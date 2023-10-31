@@ -27,7 +27,7 @@ def main():
             filename = input("Enter Filename: ")
             read_project_from_file(projects, filename)
         elif choice == "S":
-            filename = input("Filename: ")
+            filename = input("Enter Filename: ")
             save_projects_to_file(projects, filename)
         elif choice == "D":
             display_projects(projects)
@@ -46,7 +46,6 @@ def main():
 def read_project_from_file(projects, filename):
     """Read project information from a file and populate a list of projects."""
     with open(filename, "r", encoding="utf-8") as input_file:
-        input_file.readline()
         for line in input_file:
             parts = line.strip().split("\t")
             name = parts[0]
@@ -68,8 +67,10 @@ def save_projects_to_file(projects, filename):
 
 def display_projects(projects):
     """Display all projects in the current list."""
-    display_incomplete_projects(projects)
-    display_completed_projects(projects)
+    sorted_projects = projects
+    sorted_projects.sort()
+    display_incomplete_projects(sorted_projects)
+    display_completed_projects(sorted_projects)
 
 
 def display_incomplete_projects(projects):
