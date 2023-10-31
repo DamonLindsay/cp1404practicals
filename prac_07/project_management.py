@@ -37,7 +37,7 @@ def main():
             print("Let's add a new project")
             add_project(projects)
         elif choice == "U":
-            print("Update project")
+            update_project(projects)
         else:
             print("Invalid option.")
         choice = input(">>> ").upper()
@@ -98,6 +98,20 @@ def add_project(projects):
     cost_estimate = float(input("Cost estimate: $"))
     percent_complete = int(input("Percent complete: "))
     projects.append(Project(project_name, start_date, priority, cost_estimate, percent_complete))
+
+
+def update_project(projects):
+    """Update the specified project based on user input."""
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    project_choice = int(input("Project choice: "))
+    print(projects[project_choice])
+
+    new_percentage = int(input("New Percentage: "))
+    projects[project_choice].completion_percentage = new_percentage
+
+    new_priority = int(input("New Priority: "))
+    projects[project_choice].priority = new_priority
 
 
 main()
