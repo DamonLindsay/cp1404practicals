@@ -5,7 +5,7 @@ Actual Time:
 """
 
 from project import Project
-import datetime
+from datetime import datetime
 
 DEFAULT_FILENAME = "projects.txt"
 MENU_INSTRUCTIONS = (
@@ -32,7 +32,7 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            print("Filter projects by date")
+            filter_projects_by_date(projects)
         elif choice == "A":
             print("Let's add a new project")
             add_project(projects)
@@ -112,6 +112,24 @@ def update_project(projects):
 
     new_priority = int(input("New Priority: "))
     projects[project_choice].priority = new_priority
+
+
+def filter_projects_by_date(projects):
+    """Filter projects by date."""
+    project_start_date = None  # Initialize with a default value (removes PyCharm error)
+    project_start_date_string = input("Show projects that start after date (dd/mm/yy): ")
+    try:
+        project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%y")
+    except ValueError:
+        print("Invalid date format.  Please use 'dd/mm/yy'.")
+    if project_start_date:  # This will check project_start_date is not equal to none
+        filtered_projects = [project for project in projects if
+                             datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
+        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
+
+        print(f"Filtered and sorted projects starting after {project_start_date.strftime('%Y-%m-%d')} are: ")
+        for project in sorted_projects:
+            print(project)
 
 
 main()
