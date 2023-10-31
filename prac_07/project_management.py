@@ -34,7 +34,8 @@ def main():
         elif choice == "F":
             print("Filter projects by date")
         elif choice == "A":
-            print("Add new project")
+            print("Let's add a new project")
+            add_project(projects)
         elif choice == "U":
             print("Update project")
         else:
@@ -87,6 +88,16 @@ def display_completed_projects(projects):
     for project in projects:
         if project.completion_percentage == 100:
             print(f"  {project}")
+
+
+def add_project(projects):
+    """Add a new project (from user input) to the specified list."""
+    project_name = input("Name: ")
+    start_date = input("Start date (dd/mm/yy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    percent_complete = int(input("Percent complete: "))
+    projects.append(Project(project_name, start_date, priority, cost_estimate, percent_complete))
 
 
 main()
