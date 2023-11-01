@@ -73,16 +73,20 @@ def display_projects(projects):
     sorted_projects = projects
     sorted_projects.sort()
     print("Incomplete projects: ")
-    display_project_status(sorted_projects, 100, False)
-    display_project_status(sorted_projects, 100, True)
+    display_project_status(sorted_projects, False)
+    print("Completed projects: ")
+    display_project_status(sorted_projects, True)
 
 
-def display_project_status(projects, percentage, status):
-    """Display incomplete projects."""
-    for project in projects:
-        if project.completion_percentage == percentage:
-            if (status and project.completion_percentage == 100) or (
-                    not status and project.completion_percentage < 100):
+def display_project_status(projects, is_completed):
+    """Display complete and incomplete projects."""
+    if is_completed is False:
+        for project in projects:
+            if project.completion_percentage < 100:
+                print(f"  {project}")
+    else:
+        for project in projects:
+            if project.completion_percentage == 100:
                 print(f"  {project}")
 
 
@@ -109,7 +113,7 @@ def collect_project_details():
 
 
 def get_valid_input(prompt, input_type):
-    """Get a valid date input from the user based on the specified input type."""
+    """Get a valid input from the user based on the specified input type."""
     while True:
         try:
             if input_type == "date":
@@ -153,29 +157,22 @@ def update_project(projects):
 
 def filter_projects_by_date(projects):
     """Filter projects by date."""
-    is_valid_input = False
-    while not is_valid_input:
+    while True:
         project_start_date_string = input("Show projects that start after date (dd/mm/yyyy): ")
-        project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
-        if project_start_date:  # This will check project_start_date is not equal to none
-            is_valid_input = True
+        try:
+            project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
+            filtered_projects = [project for project in projects if datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
+            sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
 
-    sorted_projects = filter_and_sort_projects_by_date(projects, project_start_date)
-
-    if sorted_projects:
-        print(f"Filtered and sorted projects starting after {project_start_date.strftime('%d/%m/%Y')} are: ")
-        for project in sorted_projects:
-            print(project)
-
-
-def filter_and_sort_projects_by_date(projects, start_date):
-    """Filter and sort projects by start date."""
-    if start_date:
-        filtered_projects = [project for project in projects if
-                             datetime.strptime(project.start_date, "%d/%m/%Y") > start_date]
-        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
-        return sorted_projects
-    return []
+            if sorted_projects:
+                print(f"Filtered and sorted projects starting after {project_start_date.strftime('%d/%m/%Y')} are: ")
+                for project in sorted_projects:
+                    print(project)
+                break
+            else:
+                print("No projects found after the specified date.")
+        except ValueError:
+            print("Invalid date format.  Please use 'dd/mm/yyyy'.")
 
 
 main()
