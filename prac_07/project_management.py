@@ -116,20 +116,38 @@ def update_project(projects):
 
 def filter_projects_by_date(projects):
     """Filter projects by date."""
-    project_start_date = None  # Initialize with a default value (removes PyCharm error)
-    project_start_date_string = input("Show projects that start after date (dd/mm/yy): ")
-    try:
-        project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%y")
-    except ValueError:
-        print("Invalid date format.  Please use 'dd/mm/yy'.")
-    if project_start_date:  # This will check project_start_date is not equal to none
-        filtered_projects = [project for project in projects if
-                             datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
-        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
+    is_valid_input = False
+    while not is_valid_input:
+        project_start_date_string = input("Show projects that start after date (dd/mm/yy): ")
+        project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
+        if project_start_date:  # This will check project_start_date is not equal to none
+            is_valid_input = True
 
+    sorted_projects = filter_and_sort_projects_by_date(projects, project_start_date)
+
+    if sorted_projects:
         print(f"Filtered and sorted projects starting after {project_start_date.strftime('%Y-%m-%d')} are: ")
         for project in sorted_projects:
             print(project)
+
+
+def validate_date_input(date_string):
+    """Validate date input."""
+    try:
+        return datetime.strptime(date_string, "%d/%m/%y")
+    except ValueError:
+        print("Invalid date format.  Please use 'dd/mm/yy'.")
+        return None
+
+
+def filter_and_sort_projects_by_date(projects, start_date):
+    """Filter and sort projects by start date."""
+    if start_date:
+        filtered_projects = [project for project in projects if
+                             datetime.strptime(project.start_date, "%d/%m/%Y") > start_date]
+        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%y"))
+        return sorted_projects
+    return []
 
 
 main()
