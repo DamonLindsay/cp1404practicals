@@ -73,9 +73,9 @@ def display_projects(projects):
     sorted_projects = projects
     sorted_projects.sort()
     print("Incomplete projects: ")
-    display_project_status(sorted_projects, False)
+    display_project_status(sorted_projects, False)  # Display incomplete projects
     print("Completed projects: ")
-    display_project_status(sorted_projects, True)
+    display_project_status(sorted_projects, True)  # Display completed projects
 
 
 def display_project_status(projects, is_completed):
@@ -161,7 +161,8 @@ def filter_projects_by_date(projects):
         project_start_date_string = input("Show projects that start after date (dd/mm/yyyy): ")
         try:
             project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
-            filtered_projects = [project for project in projects if datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
+            filtered_projects = [project for project in projects if
+                                 datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
             sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
 
             if sorted_projects:
