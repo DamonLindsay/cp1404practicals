@@ -99,7 +99,7 @@ def add_project(projects):
 def collect_project_details():
     """Collect project details from user input."""
     project_name = input("Name: ")
-    start_date = get_valid_input("Start date (dd/mm/yy): ", "date")
+    start_date = get_valid_input("Start date (dd/mm/yyyy): ", "date")
     priority = get_valid_input("Priority: ", "integer")
     cost_estimate = get_valid_input("Cost estimate: $", "float")
     percent_completion = get_valid_input("Percent complete: ", "integer")
@@ -112,11 +112,15 @@ def collect_project_details():
 
 
 def get_valid_input(prompt, input_type):
-    """Get a valid date input from the user based on the specified input type.."""
+    """Get a valid date input from the user based on the specified input type."""
     while True:
         try:
             if input_type == "date":
-                return datetime.strptime(input(prompt), "%d/%m/%y").strftime("%d/%m/%y")
+                date_string = input(prompt)
+                try:
+                    return datetime.strptime(date_string, "%d/%m/%Y").strftime("%d/%m/%Y")
+                except ValueError:
+                    print("Invalid date format.  Please use 'dd/mm/yyyy'.")
             elif input_type == "integer":
                 return int(input(prompt))
             elif input_type == "float":
@@ -153,18 +157,9 @@ def filter_projects_by_date(projects):
     sorted_projects = filter_and_sort_projects_by_date(projects, project_start_date)
 
     if sorted_projects:
-        print(f"Filtered and sorted projects starting after {project_start_date.strftime('%Y-%m-%d')} are: ")
+        print(f"Filtered and sorted projects starting after {project_start_date.strftime('%d/%m/%Y')} are: ")
         for project in sorted_projects:
             print(project)
-
-
-def validate_date_input(date_string):
-    """Validate date input."""
-    try:
-        return datetime.strptime(date_string, "%d/%m/%y")
-    except ValueError:
-        print("Invalid date format.  Please use 'dd/mm/yy'.")
-        return None
 
 
 def filter_and_sort_projects_by_date(projects, start_date):
@@ -172,7 +167,7 @@ def filter_and_sort_projects_by_date(projects, start_date):
     if start_date:
         filtered_projects = [project for project in projects if
                              datetime.strptime(project.start_date, "%d/%m/%Y") > start_date]
-        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%y"))
+        sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
         return sorted_projects
     return []
 
