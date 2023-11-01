@@ -18,17 +18,17 @@ def main():
     as well as update them. """
     projects = []
 
-    load_or_save_projects(projects, DEFAULT_FILENAME, "load")
+    load_projects(projects, DEFAULT_FILENAME)
 
     print(MENU_INSTRUCTIONS)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
             filename = input("Enter Filename: ")
-            load_or_save_projects(projects, filename, "load")
+            load_projects(projects, filename)
         elif choice == "S":
             filename = input("Enter Filename: ")
-            load_or_save_projects(projects, filename, "save")
+            save_projects(projects, filename)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -42,52 +42,48 @@ def main():
             print("Invalid option.")
         print(MENU_INSTRUCTIONS)
         choice = input(">>> ").upper()
-    load_or_save_projects(projects, DEFAULT_FILENAME, "save")
+    save_projects(projects, DEFAULT_FILENAME)
     print("Thank you for using custom-built project management software.")
 
 
-def load_or_save_projects(projects, filename, action):
-    """Load or save projects to a file based on the specified action."""
-    if action == "load":
-        with open(filename, "r", encoding="utf-8") as input_file:
-            for line in input_file:
-                parts = line.strip().split("\t")
-                name = parts[0]
-                start_date = parts[1]
-                priority = int(parts[2])
-                cost = float(parts[3])
-                percentage_completion = int(parts[4])
-                project = Project(name, start_date, priority, cost, percentage_completion)
-                projects.append(project)
-    elif action == "save":
-        with open(filename, "w", encoding="utf-8") as output_file:
-            for project in projects:
-                print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
-                      f"{project.completion_percentage}", file=output_file)
+def load_projects(projects, filename):
+    """Load projects from a file."""
+    with open(filename, "r", encoding="utf-8") as input_file:
+        for line in input_file:
+            parts = line.strip().split("\t")
+            name = parts[0]
+            start_date = parts[1]
+            priority = int(parts[2])
+            cost = float(parts[3])
+            percentage_completion = int(parts[4])
+            project = Project(name, start_date, priority, cost, percentage_completion)
+            projects.append(project)
+
+
+def save_projects(projects, filename):
+    """Save projects to a file."""
+    with open(filename, "w", encoding="utf-8") as output_file:
+        for project in projects:
+            print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
+                  f"{project.completion_percentage}", file=output_file)
 
 
 def display_projects(projects):
     """Display all projects in the current list."""
     sorted_projects = projects
     sorted_projects.sort()
-    display_incomplete_projects(sorted_projects)
-    display_completed_projects(sorted_projects)
+    print("Incomplete projects: ")
+    display_project_status(sorted_projects, 100, False)
+    display_project_status(sorted_projects, 100, True)
 
 
-def display_incomplete_projects(projects):
+def display_project_status(projects, percentage, status):
     """Display incomplete projects."""
-    print("Incomplete projects:")
     for project in projects:
-        if project.completion_percentage < 100:
-            print(f"  {project}")
-
-
-def display_completed_projects(projects):
-    """Display completed projects."""
-    print("Completed projects:")
-    for project in projects:
-        if project.completion_percentage == 100:
-            print(f"  {project}")
+        if project.completion_percentage == percentage:
+            if (status and project.completion_percentage == 100) or (
+                    not status and project.completion_percentage < 100):
+                print(f"  {project}")
 
 
 def add_project(projects):
