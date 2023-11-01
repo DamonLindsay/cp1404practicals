@@ -1,6 +1,7 @@
 """
 Project class module
 """
+from datetime import datetime
 
 
 class Project:
