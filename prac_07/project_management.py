@@ -1,7 +1,7 @@
 """
 Project Management
 Expected Time: 120 minutes (8:03pm start)
-Actual Time:
+Actual Time: Like 5 hours ????!?!?!
 """
 
 from project import Project
@@ -156,23 +156,36 @@ def update_project(projects):
 
 def filter_projects_by_date(projects):
     """Filter and display projects that start after the specified date."""
+    project_start_date = get_start_date()
+    if project_start_date:
+        filtered_projects = filter_by_date(projects, project_start_date)
+        display_filtered_projects(filtered_projects, project_start_date)
+    else:
+        print("No projects found after the specified date.")
+
+
+def get_start_date():
+    """Retrieve the start date for filtering projects."""
     while True:
         project_start_date_string = input("Show projects that start after date (dd/mm/yyyy): ")
         try:
-            project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
-            filtered_projects = [project for project in projects if
-                                 datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
-            sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
-
-            if sorted_projects:
-                print(f"Filtered and sorted projects starting after {project_start_date.strftime('%d/%m/%Y')} are: ")
-                for project in sorted_projects:
-                    print(project)
-                break
-            else:
-                print("No projects found after the specified date.")
+            return datetime.strptime(project_start_date_string, "%d/%m/%Y")
         except ValueError:
             print("Invalid date format.  Please use 'dd/mm/yyyy'.")
+
+
+def filter_by_date(projects, project_start_date):
+    """Filter the projects list based on the specified date."""
+    return [project for project in projects if datetime.strptime(project.start_date, "%d/%m/%Y") > project_start_date]
+
+
+def display_filtered_projects(filtered_projects, project_start_date):
+    """Display the filtered and sorted projects."""
+    sorted_projects = sorted(filtered_projects, key=lambda x: datetime.strptime(x.start_date, "%d/%m/%Y"))
+    if sorted_projects:
+        print(f"Filtered and sorted projects starting after {project_start_date.strftime('%d/%m/%Y')} are: ")
+        for project in sorted_projects:
+            print(project)
 
 
 main()
