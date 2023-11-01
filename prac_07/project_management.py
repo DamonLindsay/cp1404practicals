@@ -18,17 +18,17 @@ def main():
     as well as update them. """
     projects = []
 
-    read_project_from_file(projects, DEFAULT_FILENAME)
+    load_or_save_projects(projects, DEFAULT_FILENAME, "load")
 
     print(MENU_INSTRUCTIONS)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
             filename = input("Enter Filename: ")
-            read_project_from_file(projects, filename)
+            load_or_save_projects(projects, filename, "load")
         elif choice == "S":
             filename = input("Enter Filename: ")
-            save_projects_to_file(projects, filename)
+            load_or_save_projects(projects, filename, "save")
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -40,30 +40,29 @@ def main():
             update_project(projects)
         else:
             print("Invalid option.")
+        print(MENU_INSTRUCTIONS)
         choice = input(">>> ").upper()
     print("Thank you for using custom-built project management software.")
 
 
-def read_project_from_file(projects, filename):
-    """Read project information from a file and populate a list of projects."""
-    with open(filename, "r", encoding="utf-8") as input_file:
-        for line in input_file:
-            parts = line.strip().split("\t")
-            name = parts[0]
-            start_date = parts[1]
-            priority = int(parts[2])
-            cost = float(parts[3])
-            percentage_completion = int(parts[4])
-            project = Project(name, start_date, priority, cost, percentage_completion)
-            projects.append(project)
-
-
-def save_projects_to_file(projects, filename):
-    """Save the projects to a specified file."""
-    with open(filename, "w", encoding="utf-8") as output_file:
-        for project in projects:
-            print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
-                  f"{project.completion_percentage}", file=output_file)
+def load_or_save_projects(projects, filename, action):
+    """Load or save projects to a file based on the specified action."""
+    if action == "load":
+        with open(filename, "r", encoding="utf-8") as input_file:
+            for line in input_file:
+                parts = line.strip().split("\t")
+                name = parts[0]
+                start_date = parts[1]
+                priority = int(parts[2])
+                cost = float(parts[3])
+                percentage_completion = int(parts[4])
+                project = Project(name, start_date, priority, cost, percentage_completion)
+                projects.append(project)
+    elif action == "save":
+        with open(filename, "w", encoding="utf-8") as output_file:
+            for project in projects:
+                print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t"
+                      f"{project.completion_percentage}", file=output_file)
 
 
 def display_projects(projects):
@@ -92,12 +91,52 @@ def display_completed_projects(projects):
 
 def add_project(projects):
     """Add a new project (from user input) to the specified list."""
+    new_project = collect_project_details()
+    if new_project:
+        projects.append(new_project)
+
+
+def collect_project_details():
+    """Collect project details from user input."""
     project_name = input("Name: ")
-    start_date = input("Start date (dd/mm/yy): ")
-    priority = int(input("Priority: "))
-    cost_estimate = float(input("Cost estimate: $"))
-    percent_complete = int(input("Percent complete: "))
-    projects.append(Project(project_name, start_date, priority, cost_estimate, percent_complete))
+    start_date = get_valid_date("Start date (dd/mm/yy): ")
+    priority = get_valid_integer("Priority: ")
+    cost_estimate = get_valid_float("Cost estimate: $")
+    percent_completion = get_valid_integer("Percent complete: ")
+
+    if start_date and priority is not None and cost_estimate is not None and percent_completion is not None:
+        return Project(project_name, start_date, priority, cost_estimate, percent_completion)
+    else:
+        print("Invalid input.  Project details not collected.")
+        return None
+
+
+def get_valid_date(prompt):
+    """Get a valid date input from the user."""
+    while True:
+        try:
+            date_string = input(prompt)
+            return datetime.strptime(date_string, "%d/%m/%y").strftime("%d/%m/%y")
+        except ValueError:
+            print("Invalid date format.  Please use 'dd/mm/yy'.")
+
+
+def get_valid_integer(prompt):
+    """Get a valid integer input from the user."""
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Invalid input.  Please enter an integer.")
+
+
+def get_valid_float(prompt):
+    """Get a valid float input from the user."""
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input.  Please enter a float.")
 
 
 def update_project(projects):
