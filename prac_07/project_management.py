@@ -14,8 +14,7 @@ MENU_INSTRUCTIONS = (
 
 
 def main():
-    """This menu-based program will allow a user to interact with various projects and check their status,
-    as well as update them. """
+    """This menu-based program will allow a user to manage project data based on user choices in the menu."""
     projects = []
 
     load_projects(projects, DEFAULT_FILENAME)
@@ -69,7 +68,7 @@ def save_projects(projects, filename):
 
 
 def display_projects(projects):
-    """Display all projects in the current list."""
+    """Display all projects, sorted by priority.  Separates and displays incomplete and complete projects."""
     sorted_projects = projects
     sorted_projects.sort()
     print("Incomplete projects: ")
@@ -79,7 +78,7 @@ def display_projects(projects):
 
 
 def display_project_status(projects, is_completed):
-    """Display complete and incomplete projects."""
+    """Display projects based on completion status, complete or incomplete."""
     if is_completed is False:
         for project in projects:
             if project.completion_percentage < 100:
@@ -91,14 +90,14 @@ def display_project_status(projects, is_completed):
 
 
 def add_project(projects):
-    """Add a new project (from user input) to the specified list."""
+    """Add a new project to the list after collecting and validating project details."""
     new_project = collect_project_details()
     if new_project:
         projects.append(new_project)
 
 
 def collect_project_details():
-    """Collect project details from user input."""
+    """Collect and validate project details from user input."""
     project_name = input("Name: ")
     start_date = get_valid_input("Start date (dd/mm/yyyy): ", "date")
     priority = get_valid_input("Priority: ", "integer")
@@ -133,7 +132,7 @@ def get_valid_input(prompt, input_type):
 
 
 def update_project(projects):
-    """Update the specified project based on user input."""
+    """Update a chosen project with new completion percentage and priority based on user input."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
     while True:
@@ -156,7 +155,7 @@ def update_project(projects):
 
 
 def filter_projects_by_date(projects):
-    """Filter projects by date."""
+    """Filter and display projects that start after the specified date."""
     while True:
         project_start_date_string = input("Show projects that start after date (dd/mm/yyyy): ")
         try:
