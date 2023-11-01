@@ -99,10 +99,10 @@ def add_project(projects):
 def collect_project_details():
     """Collect project details from user input."""
     project_name = input("Name: ")
-    start_date = get_valid_date("Start date (dd/mm/yy): ")
-    priority = get_valid_integer("Priority: ")
-    cost_estimate = get_valid_float("Cost estimate: $")
-    percent_completion = get_valid_integer("Percent complete: ")
+    start_date = get_valid_input("Start date (dd/mm/yy): ", "date")
+    priority = get_valid_input("Priority: ", "integer")
+    cost_estimate = get_valid_input("Cost estimate: $", "float")
+    percent_completion = get_valid_input("Percent complete: ", "integer")
 
     if start_date and priority is not None and cost_estimate is not None and percent_completion is not None:
         return Project(project_name, start_date, priority, cost_estimate, percent_completion)
@@ -111,32 +111,20 @@ def collect_project_details():
         return None
 
 
-def get_valid_date(prompt):
-    """Get a valid date input from the user."""
+def get_valid_input(prompt, input_type):
+    """Get a valid date input from the user based on the specified input type.."""
     while True:
         try:
-            date_string = input(prompt)
-            return datetime.strptime(date_string, "%d/%m/%y").strftime("%d/%m/%y")
+            if input_type == "date":
+                return datetime.strptime(input(prompt), "%d/%m/%y").strftime("%d/%m/%y")
+            elif input_type == "integer":
+                return int(input(prompt))
+            elif input_type == "float":
+                return float(input(prompt))
+            else:
+                print("Invalid input type.")
         except ValueError:
-            print("Invalid date format.  Please use 'dd/mm/yy'.")
-
-
-def get_valid_integer(prompt):
-    """Get a valid integer input from the user."""
-    while True:
-        try:
-            return int(input(prompt))
-        except ValueError:
-            print("Invalid input.  Please enter an integer.")
-
-
-def get_valid_float(prompt):
-    """Get a valid float input from the user."""
-    while True:
-        try:
-            return float(input(prompt))
-        except ValueError:
-            print("Invalid input.  Please enter a float.")
+            print(f"Invalid input.  Please enter a valid '{input_type}'.")
 
 
 def update_project(projects):
