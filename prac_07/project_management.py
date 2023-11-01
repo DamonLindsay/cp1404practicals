@@ -42,6 +42,7 @@ def main():
             print("Invalid option.")
         print(MENU_INSTRUCTIONS)
         choice = input(">>> ").upper()
+    load_or_save_projects(projects, DEFAULT_FILENAME, "save")
     print("Thank you for using custom-built project management software.")
 
 
@@ -135,21 +136,30 @@ def update_project(projects):
     """Update the specified project based on user input."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
-    project_choice = int(input("Project choice: "))
-    print(projects[project_choice])
+    while True:
+        try:
+            project_choice = int(input("Project choice: "))
+            if 0 <= project_choice < len(projects):
+                print(projects[project_choice])
 
-    new_percentage = int(input("New Percentage: "))
-    projects[project_choice].completion_percentage = new_percentage
-
-    new_priority = int(input("New Priority: "))
-    projects[project_choice].priority = new_priority
+                new_percentage = input("New Completion Percentage: ")
+                new_priority = input("New Priority: ")
+                if new_percentage:
+                    projects[project_choice].completion_percentage = int(new_percentage)
+                if new_priority:
+                    projects[project_choice].priority = int(new_priority)
+                break
+            else:
+                print("Invalid project choice.  Please enter a valid index.")
+        except ValueError:
+            print("Invalid input.  Please enter a valid integer for project choice.")
 
 
 def filter_projects_by_date(projects):
     """Filter projects by date."""
     is_valid_input = False
     while not is_valid_input:
-        project_start_date_string = input("Show projects that start after date (dd/mm/yy): ")
+        project_start_date_string = input("Show projects that start after date (dd/mm/yyyy): ")
         project_start_date = datetime.strptime(project_start_date_string, "%d/%m/%Y")
         if project_start_date:  # This will check project_start_date is not equal to none
             is_valid_input = True
