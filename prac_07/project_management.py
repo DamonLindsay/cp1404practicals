@@ -1,7 +1,7 @@
 """
 Project Management
 Expected Time: 120 minutes (8:03pm start)
-Actual Time: Like 5 hours ????!?!?!
+Actual Time: 6 hours (Finished the following day after multiple give-ups and walk-aways).
 """
 
 from datetime import datetime
