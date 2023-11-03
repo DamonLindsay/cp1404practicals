@@ -7,11 +7,11 @@ Programming Language class with tests.
 class ProgrammingLanguage:
     """Represent information about a programming language."""
 
-    def __init__(self, name="", typing="", reflection=False, pointer_arithmetic=False, year=0):
+    def __init__(self, name="", typing="", has_reflection=False, pointer_arithmetic=False, year=0):
         """Construct a ProgrammingLanguage from the given values."""
         self.name = name
         self.typing = typing
-        self.reflection = reflection
+        self.reflection = has_reflection
         self.pointer_arithmetic = pointer_arithmetic
         self.year = year
 
