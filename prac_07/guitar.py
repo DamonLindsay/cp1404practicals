@@ -7,7 +7,7 @@ CURRENT_YEAR = 2023
 class Guitar:
     """Guitar class module"""
 
-    def __init__(self, name="", year=0, cost=0):
+    def __init__(self, name="", year=0, cost=0.0):
         """Initialize the Guitar object."""
         self.name = name
         self.year = year
@@ -24,6 +24,9 @@ class Guitar:
     def __lt__(self, other):
         """Test for less than other based on the 'year' attribute."""
         return self.year < other.year
+
+    def __gt__(self, other):
+        """Test for greater than other based on the 'year' attribute."""
 
     def get_age(self):
         """Return how old the guitar is in years."""
