@@ -1,16 +1,15 @@
 """
 Project Management
 Expected Time: 120 minutes (8:03pm start)
-Actual Time: Like 5 hours ????!?!?!
+Actual Time: 6 hours (Finished the following day after multiple give-ups and walk-aways).
 """
 
-from project import Project
 from datetime import datetime
+from project import Project
 
 DEFAULT_FILENAME = "projects.txt"
-MENU_INSTRUCTIONS = (
-    "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n"
-    "- (U)pdate project\n- (Q)uit")
+MENU_INSTRUCTIONS = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n"
+                     "- (A)dd new project\n- (U)pdate project\n- (Q)uit")
 
 
 def main():
@@ -106,9 +105,8 @@ def collect_project_details():
 
     if start_date and priority is not None and cost_estimate is not None and percent_completion is not None:
         return Project(project_name, start_date, priority, cost_estimate, percent_completion)
-    else:
-        print("Invalid input.  Project details not collected.")
-        return None
+    print("Invalid input.  Project details not collected.")
+    return None
 
 
 def get_valid_input(prompt, input_type):
@@ -148,8 +146,7 @@ def update_project(projects):
                 if new_priority:
                     projects[project_choice].priority = int(new_priority)
                 break
-            else:
-                print("Invalid project choice.  Please enter a valid index.")
+            print("Invalid project choice.  Please enter a valid index.")
         except ValueError:
             print("Invalid input.  Please enter a valid integer for project choice.")
 
