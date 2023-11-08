@@ -24,5 +24,12 @@ class ConvertMilesToKM(App):
         """Convert miles to kilometres."""
         return miles * 1.60934
 
+    def handle_increment(self, increment_value):
+        """Increment the miles."""
+        current_miles = self.root.ids.user_input.text
+        miles = float(current_miles)
+        update_miles = miles + increment_value
+        self.root.ids.user_input.text = str(update_miles)
+
 
 ConvertMilesToKM().run()
