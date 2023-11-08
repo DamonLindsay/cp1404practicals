@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 
+MILES_TO_KILOMETRES_CONVERSION_RATE = 1.60934  # 1 kilometer
+
 
 class ConvertMilesToKM(App):
     """"""
@@ -25,7 +27,7 @@ class ConvertMilesToKM(App):
 
     def convert_miles_to_km(self, miles):
         """Convert miles to kilometres."""
-        return miles * 1.60934
+        return miles * MILES_TO_KILOMETRES_CONVERSION_RATE
 
     def handle_increment(self, increment_value):
         """Increment the miles."""
