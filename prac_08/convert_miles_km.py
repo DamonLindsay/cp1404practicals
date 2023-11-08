@@ -1,3 +1,8 @@
+"""
+Estimated: 90 minutes
+Actual: 70 minutes
+"""
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -5,8 +10,8 @@ from kivy.properties import StringProperty
 MILES_TO_KILOMETRES_CONVERSION_RATE = 1.60934  # 1 kilometer
 
 
-class ConvertMilesToKM(App):
-    """"""
+class MilesToKilometersConverterApp(App):
+    """Miles to Kilometres Converter App is a Kivy App for converting miles to kilometres."""
     message = StringProperty()
 
     def build(self):
@@ -17,20 +22,16 @@ class ConvertMilesToKM(App):
         return self.root
 
     def handle_update(self):
-        """Handle changes to the text input by updating the model from the view."""
+        """Handle text input changes and update the displayed result."""
         miles = self.root.ids.user_input.text
         try:
-            kilometres = self.convert_miles_to_km(float(miles))
+            kilometres = self.convert_miles_to_kilometres(float(miles))
             self.message = f"{kilometres}"
         except ValueError:
             self.message = "0.0"
 
-    def convert_miles_to_km(self, miles):
-        """Convert miles to kilometres."""
-        return miles * MILES_TO_KILOMETRES_CONVERSION_RATE
-
     def handle_increment(self, increment_value):
-        """Increment the miles."""
+        """Increment or decrement the miles based on the given value."""
         current_miles = self.root.ids.user_input.text
         try:
             if not current_miles:
@@ -43,5 +44,9 @@ class ConvertMilesToKM(App):
             updated_miles = increment_value
             self.root.ids.user_input.text = str(updated_miles)
 
+    def convert_miles_to_kilometres(self, miles):
+        """Convert miles to kilometres."""
+        return miles * MILES_TO_KILOMETRES_CONVERSION_RATE
 
-ConvertMilesToKM().run()
+
+MilesToKilometersConverterApp().run()
