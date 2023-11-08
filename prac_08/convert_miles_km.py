@@ -17,8 +17,12 @@ class ConvertMilesToKM(App):
     def handle_update(self):
         """Handle changes to the text input by updating the model from the view."""
         miles = self.root.ids.user_input.text
-        kilometres = self.convert_miles_to_km(float(miles))
-        self.message = f"{kilometres}"
+        try:
+            miles = float(miles)
+            kilometres = self.convert_miles_to_km(miles)
+            self.message = f"{kilometres}"
+        except ValueError:
+            self.message = "0.0"
 
     def convert_miles_to_km(self, miles):
         """Convert miles to kilometres."""
