@@ -18,8 +18,7 @@ class ConvertMilesToKM(App):
         """Handle changes to the text input by updating the model from the view."""
         miles = self.root.ids.user_input.text
         try:
-            miles = float(miles)
-            kilometres = self.convert_miles_to_km(miles)
+            kilometres = self.convert_miles_to_km(float(miles))
             self.message = f"{kilometres}"
         except ValueError:
             self.message = "0.0"
@@ -31,9 +30,16 @@ class ConvertMilesToKM(App):
     def handle_increment(self, increment_value):
         """Increment the miles."""
         current_miles = self.root.ids.user_input.text
-        miles = float(current_miles)
-        update_miles = miles + increment_value
-        self.root.ids.user_input.text = str(update_miles)
+        try:
+            if not current_miles:
+                updated_miles = increment_value
+            else:
+                miles = float(current_miles)
+                updated_miles = miles + increment_value
+            self.root.ids.user_input.text = str(updated_miles)
+        except ValueError:
+            updated_miles = increment_value
+            self.root.ids.user_input.text = str(updated_miles)
 
 
 ConvertMilesToKM().run()
