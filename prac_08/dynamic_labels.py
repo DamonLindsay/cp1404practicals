@@ -5,7 +5,6 @@ Actual: Approx 30 minutes
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 
 
