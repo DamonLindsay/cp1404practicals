@@ -32,12 +32,12 @@ class MilesToKilometersConverterApp(App):
 
     def handle_increment(self, increment_value):
         """Increment or decrement the miles based on the given value."""
-        current_miles = self.root.ids.user_input.text
+        miles_string = self.root.ids.user_input.text
         try:
-            if not current_miles:
+            if not miles_string:
                 updated_miles = increment_value
             else:
-                miles = float(current_miles)
+                miles = float(miles_string)
                 updated_miles = miles + increment_value
             self.root.ids.user_input.text = str(updated_miles)
         except ValueError:
