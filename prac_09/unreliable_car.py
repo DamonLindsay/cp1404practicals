@@ -1,7 +1,7 @@
 """
 Unreliable Car Class Module
 Estimated: 15 minutes
-Actual:
+Actual: 13 minutes
 """
 import random
 
