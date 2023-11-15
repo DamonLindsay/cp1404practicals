@@ -22,5 +22,5 @@ class SilverServiceTaxi(Taxi):
         return self.flagfall + (self.price_per_km * self.current_fare_distance)
 
     def __str__(self):
-        """Return a string like a Taxi but with current fare distance and flagfall."""
+        """Return a string like a Taxi but with flagfall."""
         return f"{super().__str__()} plus flagfall of ${self.flagfall:.2f}"
