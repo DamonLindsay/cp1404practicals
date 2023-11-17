@@ -44,6 +44,7 @@ def main():
 
 
 def choose_taxi(taxis):
+    """Display a list of taxi's to select."""
     display_taxis(taxis)
     chosen_taxi_index = int(input("Choose taxi: "))
     if 0 <= chosen_taxi_index < len(taxis):
