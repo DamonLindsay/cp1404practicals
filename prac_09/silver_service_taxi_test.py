@@ -3,11 +3,11 @@ Silver Service Taxi Test Module
 """
 from prac_09.silver_service_taxi import SilverServiceTaxi
 
-test_taxi = SilverServiceTaxi("Test Taxi", 100, 2)
+hummer = SilverServiceTaxi("Hummer", 200, 2)
 
-print(test_taxi)
-print(f"Expected: 4.50, Actual: {test_taxi.get_fare():.2f}")
+print(hummer)
+print(f"Expected: 4.50, Actual: {hummer.get_fare():.2f}")
 
-test_taxi.drive(18)
-print(test_taxi)
-print(F"Expected: 48.80, Actual: {test_taxi.get_fare():.2f}")
+hummer.drive(18)
+print(hummer)
+print(F"Expected: 48.80, Actual: {hummer.get_fare():.2f}")
