@@ -4,8 +4,6 @@ Estimated: 30 minutes
 Actual: 43 minutes
 """
 
-from prac_09.musician import Musician
-
 
 class Band:
     """Band class for storing details of a Band."""
