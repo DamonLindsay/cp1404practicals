@@ -6,7 +6,7 @@ class Car:
 
     # Mod 6: Now add a name field to the Car class (in car.py), and adjust the __init__ and __str__ methods to set and
     # display this respectively.
-    def __init__(self, name="", fuel=0, ):
+    def __init__(self, name="", fuel=0):
         """Initialise a Car instance.
 
         fuel: float, one unit of fuel drives one kilometre
